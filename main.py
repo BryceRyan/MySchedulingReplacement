@@ -55,10 +55,30 @@ def trainML():
 
     test_scores = model.evaluate(x_test, y_test, verbose=2)
 
+    print("Loss: ", test_scores[0])
+    print("Accuracy: ", test_scores[1])
+    # We must fix the file path
     model.save("/MySchedulingReplacement")
     return
 
 def runML():
+    # We must fix the file path
+    model = keras.models.load_model("/MySchedulingReplacement")
+
+    # Load in the data we need from the DB - The actual applicants we want to evaluate
+     try:
+        connection = mysql.connector.connect(host = "", database="", user="", password="")
+        sql_query = ""
+        cursor = connection.cursor()
+        cursor.execute(sql_query)
+        Xdata=cursor.fetchall()
+    except Error as e:
+        print("Error reading data", e)
+
+
+    predictions = model.predict(Xdata)
+
+
     return
     # import model from .pckl file
     # import data from db about applicant
