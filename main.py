@@ -36,7 +36,7 @@ def trainML():
     except Error as e:
         print("Error reading data", e)
 
-    X_train, X_test, y_train, y_test = train_test_split(Xdata, Ydata, test_size=.4)
+    x_train, x_test, y_train, y_test = train_test_split(Xdata, Ydata, test_size=.4)
     features = len(Xdata[1])
 
     x_in = Input(shape=(features,))
@@ -66,7 +66,7 @@ def runML():
     model = keras.models.load_model("/MySchedulingReplacement")
 
     # Load in the data we need from the DB - The actual applicants we want to evaluate
-     try:
+    try:
         connection = mysql.connector.connect(host = "", database="", user="", password="")
         sql_query = ""
         cursor = connection.cursor()
