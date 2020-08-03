@@ -61,11 +61,13 @@ def trainML():
     model.save("/MySchedulingReplacement")
     return
 
+
+# This runs the ML for one applicant
 def runML():
     # We must fix the file path
     model = keras.models.load_model("/MySchedulingReplacement")
 
-    # Load in the data we need from the DB - The actual applicants we want to evaluate
+    # Load in the data we need from the DB - The actual applicant we want to evaluate and the jobs we want to evaluate them for.
     try:
         connection = mysql.connector.connect(host = "", database="", user="", password="")
         sql_query = ""
@@ -79,10 +81,8 @@ def runML():
     predictions = model.predict(Xdata)
 
 
-    return
-    # import model from .pckl file
-    # import data from db about applicant
-    # SQL query DB for jobs that meet non-negotiable criteria
+    return predictions
+
     # Run the model on each job, making sure to add in the job predictors when we run the model - make a sorted list
     # Present models with the highest matches
 
